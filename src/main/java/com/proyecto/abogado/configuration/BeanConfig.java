@@ -1,6 +1,6 @@
 package com.proyecto.abogado.configuration;
 
-import com.proyecto.abogado.repository.UserRepository;
+import com.proyecto.abogado.repository.LawyerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,11 +16,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class BeanConfig {
 
-    private final UserRepository userRepository;
+    private final LawyerRepository lawyerRepository;
 
     @Bean
     public UserDetailsService userDetailsService(){
-        return username -> userRepository.findByDni(username)
+        return username -> lawyerRepository.findByDni(username)
                 .orElseThrow(()-> new RuntimeException("El usuario no fue encontrado"));
     }
 

@@ -1,39 +1,39 @@
 package com.proyecto.abogado.service;
 
-import com.proyecto.abogado.dto.UserRequestDto;
+import com.proyecto.abogado.dto.ClientRequestDto;
+import com.proyecto.abogado.dto.LawyerRequestDto;
 import com.proyecto.abogado.mapper.UserMapper;
+import com.proyecto.abogado.model.ClientModel;
 import com.proyecto.abogado.model.RoleModel;
-import com.proyecto.abogado.model.UserModel;
-import com.proyecto.abogado.repository.UserRepository;
+import com.proyecto.abogado.model.LawyerModel;
+import com.proyecto.abogado.repository.ClientRepository;
+import com.proyecto.abogado.repository.LawyerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import static com.proyecto.abogado.utils.Constant.CLIENT_ROLE;
-import static com.proyecto.abogado.utils.Constant.LAWYER_ROLE;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
+    private final LawyerRepository lawyerRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final ClientRepository clientRepository;
 
-    public UserModel createLawyer(UserRequestDto userRequestDto){
-        UserModel userModel = userMapper.toUserModel(userRequestDto);
-        userModel.setRole(RoleModel.LAWYER_ROLE);
-        userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
-        userRepository.save(userModel);
-        return userModel;
+    public LawyerModel createLawyer(LawyerRequestDto lawyerRequestDto){
+        LawyerModel lawyerModel = userMapper.toUserModel(lawyerRequestDto);
+        lawyerModel.setRole(RoleModel.LAWYER_ROLE);
+        lawyerModel.setPassword(passwordEncoder.encode(lawyerModel.getPassword()));
+        lawyerRepository.save(lawyerModel);
+        return lawyerModel;
     }
 
-    public UserModel createClient(UserRequestDto userRequestDto){
-        UserModel userModel = userMapper.toUserModel(userRequestDto);
-        userModel.setRole(RoleModel.CLIENT_ROLE);
-        userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
-        userRepository.save(userModel);
-        return userModel;
+    public ClientModel createClient(ClientRequestDto clientRequestDto){
+        ClientModel clientModel = userMapper.toClientModel(clientRequestDto);
+        clientModel.setRole(RoleModel.CLIENT_ROLE);
+        clientRepository.save(clientModel);
+        return clientModel;
     }
 
 }

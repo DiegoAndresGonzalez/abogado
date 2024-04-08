@@ -1,7 +1,6 @@
 package com.proyecto.abogado.dto;
 
-import com.proyecto.abogado.model.UserModel;
-import jakarta.persistence.*;
+import com.proyecto.abogado.model.LawyerModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,8 +11,7 @@ import java.util.Date;
 public class CaseRequestDto {
 
     private String name;
-    private String clientName;
-    private UserModel lawyer;
-    private byte[] file;
+    private Date creationDate;
+    private String description;
 
 }

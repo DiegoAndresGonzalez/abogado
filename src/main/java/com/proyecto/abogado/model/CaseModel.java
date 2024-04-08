@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.BatchSize;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -31,8 +31,9 @@ public class CaseModel {
     @Column(name = "estado")
     private boolean status;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_creacion")
-    private LocalDate creationDate;
+    private Date creationDate;
 
     @Column(name = "fecha_actualizacion")
     private LocalDate lastUpdate;
@@ -43,5 +44,9 @@ public class CaseModel {
 
     @ManyToOne
     @JoinColumn(name = "abogado_id")
-    private UserModel lawyer;
+    private LawyerModel lawyer;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private ClientModel client;
 }
